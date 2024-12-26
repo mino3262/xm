@@ -1,0 +1,8 @@
+com\app\xm\common\Result.class
+com\app\xm\exception\CustomException.class
+com\app\xm\exception\GlobalExceptionHandler.class
+com\app\xm\service\UserService.class
+com\app\xm\XmApplication.class
+com\app\xm\controller\UserController.class
+com\app\xm\entity\User.class
+com\app\xm\mapper\UserMapper.class

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.app.xm.mapper.UserMapper">
+    <select id="selectAll" resultType="com.app.xm.entity.User">
+        select * from `sys_user`
+    </select>
+
+    <insert id="insert" parameterType="com.app.xm.entity.User">
+        insert into `sys_user` (user_name, account, password, status, create_time, update_time, remark)
+        values (#{userName}, #{account}, #{password}, #{status}, #{createTime}, #{updateTime}, #{remark})
+    </insert>
+
+    <update id="updateById" parameterType="com.app.xm.entity.User">
+        update `sys_user` set user_name = #{userName}, password = #{password}, status = #{status},
+        update_time = #{updateTime}, remark = #{remark}
+        where user_id = #{userId}
+    </update>
+</mapper>
