@@ -3,6 +3,7 @@ package com.app.xm.mapper;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Delete;
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 
 import com.app.xm.entity.User;
@@ -20,5 +21,10 @@ public interface UserMapper {
 
     @Delete("delete from `sys_user` where user_id = #{userId}")
     void deleteById(Integer userId);
+
+    void updateByaccount(User user);
+
+    @Insert("insert into sys_user_role(user_id,role_id) values(#{userId},#{i})")
+    void insertRole(Integer userId, int i);
 
 }

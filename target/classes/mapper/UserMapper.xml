@@ -17,4 +17,10 @@
         update_time = #{updateTime}, remark = #{remark}
         where user_id = #{userId}
     </update>
+
+    <update id="updateByaccount" parameterType="com.app.xm.entity.User">
+        update `sys_user` set user_name = #{userName}, password = #{password}, 
+        update_time = now(), remark = #{remark}
+        where account = #{account}
+    </update>
 </mapper>

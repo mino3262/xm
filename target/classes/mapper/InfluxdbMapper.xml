@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.app.xm.mapper.InfluxdbMapper">
+
+    <!-- 根据ID查询连接信息 -->
+    <select id="selectById" resultMap="InfluxdbResultMap">
+        SELECT *
+        FROM influxdb_user_connections
+        WHERE id = #{id}
+    </select>
+
+    <!-- 查询所有连接信息 -->
+    <select id="selectAll" resultMap="InfluxdbResultMap">
+        SELECT *
+        FROM influxdb_user_connections
+    </select>
+
+    <!-- 根据用户ID查询该用户的所有连接信息 -->
+    <select id="selectByUserId" resultMap="InfluxdbResultMap">
+        SELECT *
+        FROM influxdb_user_connections
+        WHERE user_id = #{userId}
+    </select>
+
+    <!-- 插入一条新的连接信息 -->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        INSERT INTO influxdb_user_connections (
+            user_id,
+            connection_Name,
+            influxdb_Url,
+            influxdb_Username,
+            influxdb_Password,
+            influxdb_Database,
+            last_Connection_Time,
+            data_Fetch_Query,
+            is_Active,
+            create_Time,
+            update_Time,
+            remark
+        ) VALUES (
+            #{userId},
+            #{connectionName},
+            #{influxdbUrl},
+            #{influxdbUsername},
+            #{influxdbPassword},
+            #{influxdbDatabase},
+            #{lastConnectionTime},
+            #{dataFetchQuery},
+            #{isActive},
+            now(),
+            now(),
+            #{remark}
+        )
+    </insert>
+
+    <!-- 根据ID更新连接信息 -->
+    <update id="updateById">
+        UPDATE influxdb_user_connections
+        SET user_id = #{userId},
+            connection_Name = #{connectionName},
+            influxdb_Url = #{influxdbUrl},
+            influxdb_Username = #{influxdbUsername},
+            influxdb_Password = #{influxdbPassword},
+            influxdb_Database = #{influxdbDatabase},
+            last_Connection_Time = #{lastConnectionTime},
+            data_Fetch_Query = #{dataFetchQuery},
+            is_Active = #{isActive},
+            
+            update_Time = now(),
+            remark = #{remark}
+        WHERE id = #{id}
+    </update>
+
+    <!-- 根据ID删除连接信息 -->
+    <delete id="deleteById">
+        DELETE FROM influxdb_user_connections
+        WHERE id = #{id}
+    </delete>
+
+    <!-- 结果映射配置 -->
+    <resultMap id="InfluxdbResultMap" type="com.app.xm.entity.Influxdb">
+        <id property="id" column="id"/>
+        <result property="userId" column="user_id"/>
+        <result property="connectionName" column="connection_name"/>
+        <result property="influxdbUrl" column="influxdb_url"/>
+        <result property="influxdbUsername" column="influxdb_username"/>
+        <result property="influxdbPassword" column="influxdb_password"/>
+        <result property="influxdbDatabase" column="influxdb_database"/>
+        <result property="lastConnectionTime" column="last_connection_time"/>
+        <result property="dataFetchQuery" column="data_fetch_query"/>
+        <result property="isActive" column="is_active"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="remark" column="remark"/>
+    </resultMap>
+
+</mapper>
